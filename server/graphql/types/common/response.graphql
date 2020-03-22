@@ -1,0 +1,9 @@
+type DeleteResp {
+    id: Int
+    deleted: Int
+}
+
+type UpdateResp {
+    id: Int
+    updated: Int
+}
