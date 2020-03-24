@@ -5,7 +5,7 @@ import compose from 'recompose/compose';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 import withUserDetails from './withData';
 import withModal from './withModal';
-import { loadingColor } from '../../../configuration/parameter';
+import { loadingColor, IDText, emailText, phoneText, skillsetsText, hobbyText } from '../../../configuration/parameter';
 import { showForm } from '../Utils'
 
 const UserDetails = ({
@@ -29,11 +29,11 @@ const UserDetails = ({
         <Modal.Body>
           <Container fluid>
             <Form>
-              {showForm(oneUser.id, 'ID')}
-              {showForm(oneUser.email, 'Email')}
-              {showForm(oneUser.phone_no, 'Phone')}
-              {showForm(oneUser.skillsets, 'Skillsets')}
-              {showForm(oneUser.hobby, 'Hobby')}
+              {showForm(oneUser.id, IDText)}
+              {showForm(oneUser.email, emailText)}
+              {showForm(oneUser.phone_no, phoneText)}
+              {showForm(oneUser.skillsets, skillsetsText)}
+              {showForm(oneUser.hobby, hobbyText)}
             </Form>
           </Container>
         </Modal.Body>

@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo';
 import { toast } from 'react-nextjs-toast'
 import withModal from './withModal';
 import deleteQuery from './model';
+import { deleteMsg, deleteTitle, deleteButton, cancelButton } from '../../../configuration/parameter'
 
 const DeleteUser = ({
   isOpen, onToggle, mutate, refetch, id, username,
@@ -18,7 +19,7 @@ const DeleteUser = ({
           .then(() => {
             onToggle();
             setTimeout(() => refetch(), 1000);
-            toast.notify('Successfully deleted!', { duration: 7, type: 'success' });
+            toast.notify(deleteMsg, { duration: 7, type: 'success' });
           });
       }}
     >
@@ -29,15 +30,15 @@ const DeleteUser = ({
               <Button onClick={onToggle} className="delete-icon" />
               <Modal show={isOpen} onHide={onToggle} scrollable>
                 <Modal.Header closeButton>
-                  <Modal.Title>Delete User</Modal.Title>
+                  <Modal.Title>{deleteTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Container fluid>
                     <Form onSubmit={handleSubmit}>
                       <p>{`System will delete user ${username}.`}</p>
                       <p>Are you sure?</p>
-                      <Button variant="secondary" onClick={onToggle}>Cancel</Button>{'  '}
-                      <Button variant="danger" type="submit">Delete</Button>
+                      <Button variant="secondary" onClick={onToggle}>{cancelButton}</Button>{'  '}
+                      <Button variant="danger" type="submit">{deleteButton}</Button>
                     </Form>
                   </Container>
                 </Modal.Body>

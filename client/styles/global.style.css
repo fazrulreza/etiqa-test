@@ -105,3 +105,8 @@ html, body {
     margin: 2px;
     padding: 7px;
 }
+
+.main-title {
+    text-align: center;
+    padding-top: 20px;
+}

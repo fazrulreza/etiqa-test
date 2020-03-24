@@ -2,7 +2,9 @@ import ReactTable from 'react-table';
 import { Container, Badge } from 'react-bootstrap';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 import withAllUsers from './withData';
-import { loadingColor } from '../../../configuration/parameter';
+import {
+  loadingColor, usernameText, emailText, phoneText, skillsetsText, hobbyText,
+} from '../../../configuration/parameter';
 import UserDetails from '../UserDetails';
 import CreateUser from '../CreateUser';
 import UpdateUser from '../UpdateUser';
@@ -20,32 +22,34 @@ const getBadge = (list) => {
 
 const getCols = (refetch) => [
   {
-    Header: 'Username',
+    Header: usernameText,
     accessor: 'username',
     minResizeWidth: 10,
+    width: 120,
     style: { whiteSpace: 'unset' },
   },
   {
-    Header: 'E-mail',
+    Header: emailText,
     accessor: 'email',
+    Cell: ({ original: { email: w } }) => <a href={`mailto:${w}`}>{w}</a>,
     minResizeWidth: 10,
     style: { whiteSpace: 'unset' },
   },
   {
-    Header: 'Phone No',
+    Header: phoneText,
     accessor: 'phone_no',
     minResizeWidth: 10,
     style: { whiteSpace: 'unset' },
   },
   {
-    Header: 'Skillsets',
+    Header: skillsetsText,
     accessor: 'skillsets',
     Cell: ({ original: { skillsets: z } }) => getBadge(z),
     minResizeWidth: 10,
     style: { whiteSpace: 'unset' },
   },
   {
-    Header: 'Hobby',
+    Header: hobbyText,
     accessor: 'hobby',
     minResizeWidth: 10,
     style: { whiteSpace: 'unset' },

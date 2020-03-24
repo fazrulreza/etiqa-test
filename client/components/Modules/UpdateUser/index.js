@@ -7,6 +7,11 @@ import { toast } from 'react-nextjs-toast'
 import withModal from './withModal';
 import updateQuery from './model';
 import { createFrom } from '../Utils';
+import {
+  usernameError, emailError, phoneError, skillsetsError, hobbyError,
+  usernameText, emailText, phoneText, skillsetsText, hobbyText,
+  updateTitle, updateButton, updateMsg,
+} from '../../../configuration/parameter'
 
 const UpdateUser = ({
   isOpen, onToggle, mutate, refetch,
@@ -23,11 +28,11 @@ const UpdateUser = ({
       }}
       validate={(values => {
         const errors = {};
-        if (!values.username) errors.username = 'username is required';
-        if (!values.email) errors.email = 'email is required';
-        if (!values.phone_no) errors.phone_no = 'phone is required';
-        if (!values.skillsets) errors.skillsets = 'skillsets is required';
-        if (!values.hobby) errors.hobby = 'hobby is required';
+        if (!values.username) errors.username = usernameError;
+        if (!values.email) errors.email = emailError;
+        if (!values.phone_no) errors.phone_no = phoneError;
+        if (!values.skillsets) errors.skillsets = skillsetsError;
+        if (!values.hobby) errors.hobby = hobbyError;
         return errors;
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -38,13 +43,13 @@ const UpdateUser = ({
           skillsets: values.skillsets,
           hobby: values.hobby,
         };
-        mutate({ variables: { input } })
+        mutate({ variables: { id, input } })
           .then(() => {
             setSubmitting(false);
             onToggle();
             resetForm();
             setTimeout(() => refetch(), 1000);
-            toast.notify('Successfully updated!', { duration: 7, type: 'success' });
+            toast.notify(updateMsg, { duration: 7, type: 'success' });
           });
       }}
     >
@@ -60,17 +65,17 @@ const UpdateUser = ({
               <Button onClick={onToggle} className="update-icon" />
               <Modal show={isOpen} onHide={handleClose} scrollable>
                 <Modal.Header closeButton>
-                  <Modal.Title>Update User</Modal.Title>
+                  <Modal.Title>{updateTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Container fluid>
                     <Form onSubmit={handleSubmit}>
-                      {createFrom(values, touched, errors, handleChange, handleBlur, 'username', 'Username')}
-                      {createFrom(values, touched, errors, handleChange, handleBlur, 'email', 'Email')}
-                      {createFrom(values, touched, errors, handleChange, handleBlur, 'phone_no', 'Phone')}
-                      {createFrom(values, touched, errors, handleChange, handleBlur, 'skillsets', 'Skillsets')}
-                      {createFrom(values, touched, errors, handleChange, handleBlur, 'hobby', 'Hobby')}
-                      <Button type="submit">Update</Button>
+                      {createFrom(values, touched, errors, handleChange, handleBlur, 'username', usernameText)}
+                      {createFrom(values, touched, errors, handleChange, handleBlur, 'email', emailText)}
+                      {createFrom(values, touched, errors, handleChange, handleBlur, 'phone_no', phoneText)}
+                      {createFrom(values, touched, errors, handleChange, handleBlur, 'skillsets', skillsetsText)}
+                      {createFrom(values, touched, errors, handleChange, handleBlur, 'hobby', hobbyText)}
+                      <Button type="submit">{updateButton}</Button>
                     </Form>
                   </Container>
                 </Modal.Body>
