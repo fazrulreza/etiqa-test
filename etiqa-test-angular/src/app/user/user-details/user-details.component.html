@@ -1,0 +1,33 @@
+<div *ngIf="user" class="row">
+    <div class="col-md-12">
+        <h2 *ngIf="user.id">User Details</h2>
+        <h2 *ngIf="!user.id">New User</h2>
+    </div>
+</div>
+<div *ngIf="user" class="row">
+    <form class="col-md-12">
+        <div class="form-group">
+            <label for="user-usernname">Username</label>
+            <input class="form-control" name="user-username" [(ngModel)]="user.username" placeholder="Username" />
+        </div>
+        <div class="form-group">
+            <label for="user-email">Email</label>
+            <input class="form-control" name="user-email" [(ngModel)]="user.email" placeholder="Email" />
+        </div>
+        <div class="form-group">
+            <label for="user-phone-no">Phone No</label>
+            <input class="form-control" name="user-phone-no" [(ngModel)]="user.phone_no" placeholder="Phone No" />
+        </div>
+        <div class="form-group">
+            <label for="user-skillsets">Skillsets</label>
+            <input class="form-control" name="user-skillsets" [(ngModel)]="user.skillsets" placeholder="Skillsets" />
+        </div>
+        <div class="form-group">
+            <label for="user-hobby">Hobby</label>
+            <input class="form-control" name="user-hobby" [(ngModel)]="user.hobby" placeholder="Hobby" />
+        </div>
+        <button class="btn btn-primary" *ngIf="!user.id" (click)="createUser(user)">Create</button>
+        <button class="btn btn-info" *ngIf="user.id" (click)="updateUser(user)">Update</button>
+        <button class="btn btn-danger" *ngIf="user.id" (click)="deleteUser(user.id)">Delete</button>
+    </form>
+</div>
